@@ -1,3 +1,5 @@
+from dis import dis
+from operator import truediv
 import os
 import disnake
 from dotenv import load_dotenv
@@ -10,6 +12,7 @@ intents = disnake.Intents.default()
 intents.members = True
 intents.presences = True
 intents.message_content = True
+intents.guilds = True
 
 bot = commands.Bot(intents=intents)
 
