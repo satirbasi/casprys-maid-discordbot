@@ -1,5 +1,3 @@
-from dis import dis
-from operator import truediv
 import os
 import disnake
 from dotenv import load_dotenv
@@ -19,10 +17,12 @@ bot = commands.Bot(intents=intents)
 @bot.event
 async def on_ready():
     print("Ready!!")
-
-# @bot.listen("on_message")
-# async def whatever_you_want_to_call_it(message):
-#     print(message.content)
+        
+@bot.listen("on_message")
+async def askim_bebeim(message):
+    if message.content == "<@1010921624012333197> dimi":
+        await message.reply("evet aşkımm ❤")
 
 bot.load_extensions("cogs/")
+bot.load_extensions("cogs/nsfw/")
 bot.run(BOT_TOKEN)
