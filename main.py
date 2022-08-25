@@ -21,8 +21,15 @@ async def on_ready():
 @bot.listen("on_message")
 async def askim_bebeim(message):
     if message.content == "<@1010921624012333197> dimi":
-        await message.reply("evet aşkımm ❤")
+        if message.author.id == 370253988806918155:
+            await message.reply("evet aşkımm ❤")
+        else:
+            await message.reply("nahhh man stfu 💀💀💀")
 
 bot.load_extensions("cogs/")
+bot.load_extensions("cogs/events/")
+bot.load_extensions("cogs/general/")
+bot.load_extensions("cogs/moderation/")
 bot.load_extensions("cogs/nsfw/")
+
 bot.run(BOT_TOKEN)
