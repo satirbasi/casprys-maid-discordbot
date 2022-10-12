@@ -11,7 +11,15 @@ class Kick(commands.Cog):
     async def kick(self, inter: disnake.ApplicationCommandInteraction, member: disnake.Member, reason: Optional[str] = "nothing"):
         """Kicks the given user."""
         await member.kick(reason=reason)
-        await inter.response.send_message(f'i\'ve kicked {member.name}#{member.discriminator} and the reason is "{reason}"')
+
+        embed = disnake.Embed()
+
+        embed.color=disnake.Color.dark_purple()
+        embed.title="Banned"
+        embed.description=f'i\'ve banned ```{member.name}#{member.discriminator}``` and the reason is: ```{reason}```'
+        embed.set_thumbnail(url=member.avatar.url)
+
+        await inter.response.send_message(embed=embed)
 
 def setup(bot: commands.Bot):
     bot.add_cog(Kick(bot))

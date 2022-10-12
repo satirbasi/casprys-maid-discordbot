@@ -1,3 +1,4 @@
+from dis import dis
 from lib2to3.pgen2.token import EQUAL
 import disnake
 from typing import Optional
@@ -13,8 +14,16 @@ class Ban(commands.Cog):
         """Bans the given user."""
         if delete_message_days > 7:
             await inter.response.send_message(f"Day is too long max is 7 days")
-        await member.ban(reason=reason, delete_message_days=delete_message_days)
-        await inter.response.send_message(f'i\'ve banned {member.name}#{member.discriminator} and the reason is "{reason}"')
+        await member.ban(reason=reason, clean_history_duration=delete_message_days)
+
+        embed = disnake.Embed()
+
+        embed.color=disnake.Color.dark_purple()
+        embed.title="Banned"
+        embed.description=f'i\'ve banned ```{member.name}#{member.discriminator}``` and the reason is: ```{reason}```'
+        embed.set_thumbnail(url=member.avatar.url)
+
+        await inter.response.send_message(embed=embed)
 
 def setup(bot: commands.Bot):
     bot.add_cog(Ban(bot))

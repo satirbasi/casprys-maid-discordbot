@@ -1,7 +1,7 @@
 import disnake
 import os 
 from typing import Optional
-from dotenv import load_dotenv
+from py_dotenv import read_dotenv
 from saucenao_api import SauceNao
 from disnake.ext import commands
 
@@ -12,9 +12,10 @@ class Sauce(commands.Cog):
     @commands.slash_command()
     async def sauce(self, inter: disnake.ApplicationCommandInteraction, file: Optional[disnake.Attachment] = None, url: Optional[str]="",):
         """SFX Sauce command do not use this for NSFW content there is another command for that""" 
-        load_dotenv()
+        dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+        read_dotenv(dotenv_path)    
 
-        API_KEY = os.environ['SAUCE_API_KEY']
+        API_KEY = os.getenv("API_KEY")
         sauce = SauceNao(api_key=API_KEY)
         answer = sauce.from_url(url=url)
 

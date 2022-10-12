@@ -1,10 +1,12 @@
 import os
 import disnake
-from dotenv import load_dotenv
+from py_dotenv import read_dotenv
 from disnake.ext import commands
 
-load_dotenv()
-BOT_TOKEN = os.environ["BOT_TOKEN"]
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+read_dotenv(dotenv_path)
+
+BOT_TOKEN = os.getenv("TOKEN")
 
 intents = disnake.Intents.default()
 intents.members = True
@@ -12,7 +14,7 @@ intents.presences = True
 intents.message_content = True
 intents.guilds = True
 
-bot = commands.Bot(intents=intents)
+bot = commands.Bot(intents=intents, reload=True)
 
 @bot.event
 async def on_ready():
