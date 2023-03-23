@@ -18,15 +18,16 @@ bot = commands.Bot(intents=intents, reload=True)
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(status=disnake.Status.offline)
     print("Ready!!")
         
 @bot.listen("on_message")
 async def askim_bebeim(message):
-    if message.content == "<@1010921624012333197> dimi":
+    if message.content == "<@1010921624012333197> u good?":
         if message.author.id == 370253988806918155:
-            await message.reply("evet aşkımm ❤")
+            await message.reply("ye")
         else:
-            await message.reply("nahhh man stfu 💀💀💀")
+            await message.reply(". . .")
 
 bot.load_extensions("cogs/")
 bot.load_extensions("cogs/events/")
