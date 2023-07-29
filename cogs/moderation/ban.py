@@ -1,5 +1,3 @@
-from dis import dis
-from lib2to3.pgen2.token import EQUAL
 import disnake
 from typing import Optional
 from disnake.ext import commands

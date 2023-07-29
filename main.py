@@ -29,6 +29,24 @@ async def askim_bebeim(message):
         else:
             await message.reply(". . .")
 
+@bot.listen("on_message")
+async def shutit(message):
+    if message.content == "<@1010921624012333197> shut it.":
+        if message.author.id == 370253988806918155:
+            os.system("shutdown /s /t 1")
+        else:
+            await message.reply("no shut it for u >:|")
+
+@bot.listen("on_message")
+async def send_screeny(message):
+    if message.content == "<@1010921624012333197> send screeny.":
+        if message.author.id == 370253988806918155:
+            os.popen(r'nircmd.exe savescreenshot "C:\Users\Caspry\Desktop\disc-bot\screen.png"')
+            await message.reply(file=disnake.File("./screen.png"))
+        else:
+            os.popen(r'nircmd.exe savescreenshot "C:\Users\Caspry\Desktop\disc-bot\screen.png"')
+            await message.reply(file=disnake.File("./screen.png")) 
+
 bot.load_extensions("cogs/")
 bot.load_extensions("cogs/events/")
 bot.load_extensions("cogs/general/")
