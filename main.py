@@ -1,5 +1,7 @@
 import os
 import disnake
+import requests
+import random
 from py_dotenv import read_dotenv
 from disnake.ext import commands
 
@@ -30,22 +32,27 @@ async def askim_bebeim(message):
             await message.reply(". . .")
 
 @bot.listen("on_message")
-async def shutit(message):
-    if message.content == "<@1010921624012333197> shut it.":
-        if message.author.id == 370253988806918155:
-            os.system("shutdown /s /t 1")
-        else:
-            await message.reply("no shut it for u >:|")
+async def waifu(message):
+    if message.content == "waifu":
+        url = 'https://api.waifu.im/search'
 
-@bot.listen("on_message")
-async def send_screeny(message):
-    if message.content == "<@1010921624012333197> send screeny.":
-        if message.author.id == 370253988806918155:
-            os.popen(r'nircmd.exe savescreenshot "C:\Users\Caspry\Desktop\disc-bot\screen.png"')
-            await message.reply(file=disnake.File("./screen.png"))
+        params = {
+            'included_tags': [random.choice(['maid', 'waifu', 'selfies', 'uniform', 'marin-kitagawa', 'mori-calliope', 'raiden-shogun', 'oppai'])],
+            'height': '>=2000'
+        }
+
+        response = requests.get(url, params=params)
+
+        if response.status_code == 200:
+            data = response.json()
+            if 'images' in data:
+                if 'url' in data['images'][0]:
+                    await message.reply(data['images'][0]['url'])
+            else:
+                print('Key "url" not found in data')
         else:
-            os.popen(r'nircmd.exe savescreenshot "C:\Users\Caspry\Desktop\disc-bot\screen.png"')
-            await message.reply(file=disnake.File("./screen.png")) 
+            print('Request failed with status code:', response.status_code)
+
 
 bot.load_extensions("cogs/")
 bot.load_extensions("cogs/events/")
