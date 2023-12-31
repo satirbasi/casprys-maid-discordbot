@@ -20,7 +20,6 @@ bot = commands.Bot(intents=intents, reload=True)
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(status=disnake.Status.offline)
     print("Ready!!")
         
 @bot.listen("on_message")
