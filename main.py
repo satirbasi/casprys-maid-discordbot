@@ -32,7 +32,7 @@ async def askim_bebeim(message):
 
 @bot.listen("on_message")
 async def waifu(message):
-    if message.content == "waifu":
+    if message.content.lower() == "waifu":
         url = 'https://api.waifu.im/search'
 
         params = {
